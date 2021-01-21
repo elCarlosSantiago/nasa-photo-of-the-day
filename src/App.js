@@ -4,7 +4,6 @@ import { BASE_URL, API_KEY } from './constants/index';
 import axios from 'axios';
 import Nav from './components/Nav';
 import Explain from './components/Explain';
-import Footer from './components/Footer';
 import Picture from './components/Picture';
 
 function App() {
@@ -12,69 +11,32 @@ function App() {
   const [date, setDate] = useState('');
   const [explanation, setExplanation] = useState('');
   const [title, setTitle] = useState('');
+  const [copyright, setCopyright] =useState('');
 
   useEffect(() => {
-    const fetchDate = () => {
-      axios
-        .get(`${BASE_URL}?api_key=${API_KEY}`)
-        .then((res) => {
-          setDate(res.data.date);
-        })
-        .catch((err) => {
-          debugger;
-        });
-    };
-    fetchDate();
-  }, []);
-
-  useEffect(() => {
-    const fetchTitle = () => {
+    const fetchData = () => {
       axios
         .get(`${BASE_URL}?api_key=${API_KEY}`)
         .then((res) => {
           setTitle(res.data.title);
-        })
-        .catch((err) => {
-          debugger;
-        });
-    };
-    fetchTitle();
-  }, []);
-
-  useEffect(() => {
-    const fetchPictures = () => {
-      axios
-        .get(`${BASE_URL}?api_key=${API_KEY}`)
-        .then((res) => {
+          setExplanation(res.data.explanation)
           setDailyPicture(res.data.url);
+          setDate(res.data.date);
+          setCopyright(res.data.copyright);
         })
         .catch((err) => {
           debugger;
         });
     };
-    fetchPictures();
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchExplanation = () => {
-      axios
-        .get(`${BASE_URL}?api_key=${API_KEY}`)
-        .then((res) => {
-          setExplanation(res.data.explanation);
-        })
-        .catch((err) => {
-          debugger;
-        });
-    };
-    fetchExplanation();
-  }, []);
 
   return (
     <div className="App">
       <Nav date={date} title={title}/>
       <Picture dailyPicture={dailyPicture}/>
-      <Explain explanation={explanation}/>
-      {/* <Footer/> */}
+      <Explain explanation={explanation} copyright={copyright}/>
     </div>
   );
 }
