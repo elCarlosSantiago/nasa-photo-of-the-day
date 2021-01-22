@@ -5,7 +5,6 @@ import axios from 'axios';
 import Nav from './components/Nav';
 import Explain from './components/Explain';
 import Picture from './components/Picture';
-import theme from './theme/index';
 import styled, { keyframes } from 'styled-components';
 
 function App() {

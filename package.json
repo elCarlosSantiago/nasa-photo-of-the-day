@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropdown-date": "^2.2.4",
     "react-scripts": "3.4.1",
     "styled-components": "^5.2.1"
   },
